@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    // stores the emojis used for cards
+    let emojis: [String] = ["👻", "💀", "🎃", "😈", "🕸️", "🍭", "☠️", "👹", "🧙", "🙀", "🕷️", "😱"]
+    
+    @State var cardCount: Int = 1 // keeps track of the card count
+    
     var body: some View {
         VStack {
             Image(systemName: "globe")
