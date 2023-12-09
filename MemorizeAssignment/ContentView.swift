@@ -11,32 +11,56 @@ struct ContentView: View {
     // stores the emojis used for cards
     let emojis: [String] = ["👻", "💀", "🎃", "😈", "🕸️", "🍭", "☠️", "👹", "🧙", "🙀", "🕷️", "😱"]
     
-    @State var cardCount: Int = 1 // keeps track of the card count
+    @State var cardCount: Int = 4 // keeps track of the card count
     
     var body: some View {
         HStack {
-            CardView(content: emojis[0])
-            CardView(content: emojis[1])
-            CardView(content: emojis[2])
-            CardView(content: emojis[3])
+            ForEach(0..<cardCount, id: \.self) { index in
+                CardView(content: emojis[index])
+            }
+        }
+        HStack {
+            Button(action: {
+                if cardCount > 1 {
+                    cardCount -= 1
+                }
+            }, label: {
+                Image(systemName: "minus.circle")
+            })
+            .font(.largeTitle)
+            Spacer()
+            Button(action: {
+                if cardCount < emojis.count {
+                    cardCount += 1
+                }
+            }, label: {
+                Image(systemName: "plus.circle")
+            })
+            .font(.largeTitle)
         }
         .padding()
     }
+    
 }
 
 
 struct CardView: View {
     var content: String
-    var isFaceUp = true
+    @State var isFaceUp = true
     
-    @State var base = RoundedRectangle(cornerRadius: 12)
+    var base = RoundedRectangle(cornerRadius: 12)
     var body: some View {
         ZStack {
-            Text(content)
-                .font(.largeTitle)
-            base.stroke(lineWidth: 2)
+            if isFaceUp {
+                base.fill(.white)
+                Text(content)
+                base.stroke(lineWidth: 2).foregroundColor(.orange)
+            } else {
+                base.fill(.orange)
+            }
+        }.onTapGesture {
+            isFaceUp.toggle()
         }
-        .foregroundColor(.orange)
         
     }
 }
