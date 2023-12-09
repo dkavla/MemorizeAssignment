@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
-    // stores the emojis used for cards
-    let emojis: [String] = ["👻", "💀", "🎃", "😈", "🕸️", "🍭", "☠️", "👹", "🧙", "🙀", "🕷️", "😱"]
+    // array with emojis for specific themes
+    let christmasTheme: [String] = ["🎄","🌲","🎅🏻","🇨🇽","❄️","🍪","🤶🏻","🧑🏻‍🎄","☃️","🛷","🌨️","🧣"]
+    let halloweenTheme: [String] = ["👻","💀","🎃","😈","🕸️","🍭","☠️","👹","🧙","🙀","🕷️","😱"]
+    let summerTheme: [String] = ["😎","☀️","🌞","🌻","👙","🩳","🧴","⛱️","🍉","🩲","🩱","🕶️"]
+    @State var emojis: [String] = ["👻","💀","🎃","😈","🕸️","🍭","☠️","👹","🧙","🙀","🕷️","😱"]
     
-    @State var cardCount: Int = 4 // keeps track of the card count
+    @State var cardCount: Int = 1 // keeps track of the card count
     
     var body: some View {
         VStack {
@@ -47,23 +50,59 @@ struct ContentView: View {
     var cardCountAdjusters: some View {
         HStack {
             cardRemover
-            Spacer()
+            themeView
             cardAdder
         }
-        .font(.largeTitle)
-        .imageScale(.large)
     }
     
     // variable that represents the Button for
     // removing cards
     var cardRemover: some View {
         cardAdjuster(by: -1, symbol: "minus.circle")
+            .font(.largeTitle)
     }
     
     // variable that represents the Button for
     // adding cards
     var cardAdder: some View {
         cardAdjuster(by: +1, symbol: "plus.circle")
+            .font(.largeTitle)
+    }
+    
+    // creates a button for each theme with a array and symbol passed in
+    func setTheme(to theme: [String], symbol: String) -> some View {
+        Button(action: {
+            emojis = theme
+        }, label: {
+            VStack {
+                Image(systemName: symbol)
+            }
+        })
+    }
+    
+    var themeView: some View {
+        HStack {
+            Spacer()
+            christmas
+            Spacer()
+            halloween
+            Spacer()
+            summer
+            Spacer()
+        }
+        .imageScale(.large)
+    }
+    
+    var christmas: some View {
+        setTheme(to: christmasTheme, symbol: "snowflake")
+    }
+    
+    var halloween: some View {
+        setTheme(to: halloweenTheme, symbol: "leaf.fill")
+    }
+    
+    var summer: some View {
+        setTheme(to: summerTheme, symbol: "sun.max.fill")
     }
 }
 
@@ -74,7 +113,7 @@ struct CardView: View {
     
     var body: some View {
         ZStack {
-            var base = RoundedRectangle(cornerRadius: 12)
+            let base = RoundedRectangle(cornerRadius: 12)
             Group {
                 base.fill(.white)
                 Text(content).font(.largeTitle)
