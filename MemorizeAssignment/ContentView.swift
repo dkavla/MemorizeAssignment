@@ -14,12 +14,15 @@ struct ContentView: View {
     let summerTheme: [String] = ["😎","☀️","🌞","🌻","👙","🩳","🧴","⛱️","🍉","🩲","🩱","🕶️"]
     @State var emojis: [String] = ["👻","💀","🎃","😈","🕸️","🍭","☠️","👹","🧙","🙀","🕷️","😱"]
     
-    @State var cardCount: Int = 1 // keeps track of the card count
+    @State var cardCount: Int = 4 // keeps track of the card count
     
     var body: some View {
         VStack {
             Text("Memorize").font(.largeTitle).foregroundColor(.blue).fontWeight(.bold)
-            card
+            // allows us to scroll the cards view
+            ScrollView {
+                card
+            }
             Spacer()
             cardCountAdjusters
         }
@@ -41,6 +44,7 @@ struct ContentView: View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]) {
             ForEach(0..<cardCount, id: \.self) { index in
                 CardView(content: emojis[index])
+                    .aspectRatio(2/3, contentMode: .fill) // fills the screen and gives the cards a 2:3 size ratio
             }
         }
         .foregroundColor(.orange)
@@ -109,7 +113,7 @@ struct ContentView: View {
 // creates the card with emoji inside it
 struct CardView: View {
     var content: String
-    @State var isFaceUp = true
+    @State var isFaceUp = false
     
     var body: some View {
         ZStack {
