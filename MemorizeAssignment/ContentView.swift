@@ -12,10 +12,10 @@ struct ContentView: View {
     let christmasTheme: [String] = ["🎄","🌲","🎅🏻","🇨🇽","❄️","🍪","🤶🏻","🧑🏻‍🎄","☃️","🛷","🌨️","🧣"]
     let halloweenTheme: [String] = ["👻","💀","🎃","😈","🕸️","🍭","☠️","👹","🧙","🙀","🕷️","😱"]
     let summerTheme: [String] = ["😎","☀️","🌞","🌻","👙","🩳","🧴","⛱️","🍉","🩲","🩱","🕶️"]
-    @State var emojis: [String] = ["👻","💀","🎃","😈","🕸️","🍭","☠️","👹","🧙","🙀","🕷️","😱"]
+    @State var emojis: [String] = []
+
     
     @State var cardCount: Int = 4 // keeps track of the card count
-    
     var body: some View {
         VStack {
             Text("Memorize").font(.largeTitle).foregroundColor(.blue).fontWeight(.bold)
@@ -39,10 +39,11 @@ struct ContentView: View {
         .disabled(cardCount + offset < 1 || cardCount + offset > emojis.count)
     }
     
+    
     // displays the current amount of cards on screen
     var card: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]) {
-            ForEach(0..<cardCount, id: \.self) { index in
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 70))]) {
+            ForEach(0..<emojis.count, id: \.self) { index in
                 CardView(content: emojis[index])
                     .aspectRatio(2/3, contentMode: .fill) // fills the screen and gives the cards a 2:3 size ratio
             }
@@ -53,37 +54,43 @@ struct ContentView: View {
     // represnts the lower part of the display with buttons
     var cardCountAdjusters: some View {
         HStack {
-            cardRemover
+            
             themeView
-            cardAdder
+            
         }
     }
     
     // variable that represents the Button for
     // removing cards
+    /*
     var cardRemover: some View {
         cardAdjuster(by: -1, symbol: "minus.circle")
             .font(.largeTitle)
     }
+     */
     
     // variable that represents the Button for
     // adding cards
+    /*
     var cardAdder: some View {
         cardAdjuster(by: +1, symbol: "plus.circle")
             .font(.largeTitle)
     }
+     */
     
     // creates a button for each theme with a array and symbol passed in
-    func setTheme(to theme: [String], symbol: String) -> some View {
+    func setTheme(to theme: [String], name: String, symbol: String) -> some View {
         Button(action: {
             emojis = theme
         }, label: {
             VStack {
                 Image(systemName: symbol)
+                Text(name)
             }
         })
     }
     
+    // displays the three theme buttons horizontally
     var themeView: some View {
         HStack {
             Spacer()
@@ -98,15 +105,15 @@ struct ContentView: View {
     }
     
     var christmas: some View {
-        setTheme(to: christmasTheme, symbol: "snowflake")
+        setTheme(to: christmasTheme, name: "Christmas", symbol: "snowflake")
     }
     
     var halloween: some View {
-        setTheme(to: halloweenTheme, symbol: "leaf.fill")
+        setTheme(to: halloweenTheme, name: "Halloween", symbol: "leaf.fill")
     }
     
     var summer: some View {
-        setTheme(to: summerTheme, symbol: "sun.max.fill")
+        setTheme(to: summerTheme, name: "Summer", symbol: "sun.max.fill")
     }
 }
 
@@ -126,7 +133,7 @@ struct CardView: View {
             // opacity is used to make the Group contents fill if face down
             // and opacity is used to make the fill color transparent if face up
             .opacity(isFaceUp ? 1 : 0)
-            base.fill(.orange).opacity(isFaceUp ? 0 : 1)
+            base.fill(.red).opacity(isFaceUp ? 0 : 1)
         }.onTapGesture {
             isFaceUp.toggle()
         }
