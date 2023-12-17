@@ -9,13 +9,56 @@ import SwiftUI
 
 struct ContentView: View {
     // array with emojis for specific themes
-    let christmasTheme: [String] = ["🎄","🌲","🎅🏻","🇨🇽","❄️","🍪","🤶🏻","🧑🏻‍🎄","☃️","🛷","🌨️","🧣"]
-    let halloweenTheme: [String] = ["👻","💀","🎃","😈","🕸️","🍭","☠️","👹","🧙","🙀","🕷️","😱"]
-    let summerTheme: [String] = ["😎","☀️","🌞","🌻","👙","🩳","🧴","⛱️","🍉","🩲","🩱","🕶️"]
+    let christmasTheme: [(String,String)] = [
+        ("🎄","🎄"),("🎄","🎄"),("🎄","🎄"),("🎄","🎄"),("🎄","🎄"),("🎄","🎄"),
+        ("🌲","🌲"),("🌲","🌲"),("🌲","🌲"),("🌲","🌲"),("🌲","🌲"),("🌲","🌲"),
+        ("🎅🏻","🎅🏻"),("🎅🏻","🎅🏻"),("🎅🏻","🎅🏻"),("🎅🏻","🎅🏻"),("🎅🏻","🎅🏻"),("🎅🏻","🎅🏻"),
+        ("🇨🇽","🇨🇽"),("🇨🇽","🇨🇽"),("🇨🇽","🇨🇽"),("🇨🇽","🇨🇽"),("🇨🇽","🇨🇽"),("🇨🇽","🇨🇽"),
+        ("❄️","❄️"),("❄️","❄️"),("❄️","❄️"),("❄️","❄️"),("❄️","❄️"),("❄️","❄️"),
+        ("🍪","🍪"),("🍪","🍪"),("🍪","🍪"),("🍪","🍪"),("🍪","🍪"),("🍪","🍪"),
+        ("🤶🏻","🤶🏻"),("🤶🏻","🤶🏻"),("🤶🏻","🤶🏻"),("🤶🏻","🤶🏻"),("🤶🏻","🤶🏻"),("🤶🏻","🤶🏻"),
+        ("🧑🏻‍🎄","🧑🏻‍🎄"),("🧑🏻‍🎄","🧑🏻‍🎄"),("🧑🏻‍🎄","🧑🏻‍🎄"),("🧑🏻‍🎄","🧑🏻‍🎄"),("🧑🏻‍🎄","🧑🏻‍🎄"),("🧑🏻‍🎄","🧑🏻‍🎄"),
+        ("☃️","☃️"),("☃️","☃️"),("☃️","☃️"),("☃️","☃️"),("☃️","☃️"),("☃️","☃️"),
+        ("🛷","🛷"),("🛷","🛷"),("🛷","🛷"),("🛷","🛷"),("🛷","🛷"),("🛷","🛷"),
+        ("🌨️","🌨️"),("🌨️","🌨️"),("🌨️","🌨️"),("🌨️","🌨️"),("🌨️","🌨️"),("🌨️","🌨️"),
+        ("🧣","🧣"),("🧣","🧣"),("🧣","🧣"),("🧣","🧣"),("🧣","🧣"),("🧣","🧣")
+    ]
+    
+    let halloweenTheme: [(String,String)] = [
+        ("👻","👻"),("👻","👻"),("👻","👻"),("👻","👻"),
+        ("💀","💀"),("💀","💀"),("💀","💀"),("💀","💀"),
+        ("🎃","🎃"),("🎃","🎃"),("🎃","🎃"),("🎃","🎃"),
+        ("😈","😈"),("😈","😈"),("😈","😈"),("😈","😈"),
+        ("🕸️","🕸️"),("🕸️","🕸️"),("🕸️","🕸️"),("🕸️","🕸️"),
+        ("🍭","🍭"),("🍭","🍭"),("🍭","🍭"),("🍭","🍭"),
+        ("☠️","☠️"),("☠️","☠️"),("☠️","☠️"),("☠️","☠️"),
+        ("👹","👹"),("👹","👹"),("👹","👹"),("👹","👹"),
+        ("🧙","🧙"),("🧙","🧙"),("🧙","🧙"),("🧙","🧙"),
+        ("🙀","🙀"),("🙀","🙀"),("🙀","🙀"),("🙀","🙀"),
+        ("🕷️","🕷️"),("🕷️","🕷️"),("🕷️","🕷️"),("🕷️","🕷️"),
+        ("😱","😱"),("😱","😱"),("😱","😱"),("😱","😱")
+    ]
+    
+    let summerTheme: [(String,String)] = [
+        ("😎","😎"),("😎","😎"),("😎","😎"),("😎","😎"),("😎","😎"),
+        ("☀️","☀️"),("☀️","☀️"),("☀️","☀️"),("☀️","☀️"),("☀️","☀️"),
+        ("🌞","🌞"),("🌞","🌞"),("🌞","🌞"),("🌞","🌞"),("🌞","🌞"),
+        ("🌻","🌻"),("🌻","🌻"),("🌻","🌻"),("🌻","🌻"),("🌻","🌻"),
+        ("👙","👙"),("👙","👙"),("👙","👙"),("👙","👙"),("👙","👙"),
+        ("🩳","🩳"),("🩳","🩳"),("🩳","🩳"),("🩳","🩳"),("🩳","🩳"),
+        ("🧴","🧴"),("🧴","🧴"),("🧴","🧴"),("🧴","🧴"),("🧴","🧴"),
+        ("⛱️","⛱️"),("⛱️","⛱️"),("⛱️","⛱️"),("⛱️","⛱️"),("⛱️","⛱️"),
+        ("🍉","🍉"),("🍉","🍉"),("🍉","🍉"),("🍉","🍉"),("🍉","🍉"),
+        ("🩲","🩲"),("🩲","🩲"),("🩲","🩲"),("🩲","🩲"),("🩲","🩲"),
+        ("🩱","🩱"),("🩱","🩱"),("🩱","🩱"),("🩱","🩱"),("🩱","🩱"),
+        ("🕶️","🕶️"),("🕶️","🕶️"),("🕶️","🕶️"),("🕶️","🕶️"),("🕶️","🕶️")
+    ]
+    
     @State var emojis: [String] = []
 
     
-    @State var cardCount: Int = 4 // keeps track of the card count
+    @State var cardCount: Int = 0 // keeps track of the card count
+    
     var body: some View {
         VStack {
             Text("Memorize").font(.largeTitle).foregroundColor(.blue).fontWeight(.bold)
@@ -24,12 +67,13 @@ struct ContentView: View {
                 card
             }
             Spacer()
-            cardCountAdjusters
+            cardThemeAdjusters
         }
         .padding()
     }
     
     // function that creates a Button with an action and symbol image
+    /*
     func cardAdjuster(by offset: Int, symbol: String) -> some View {
         Button(action: {
             cardCount += offset
@@ -38,8 +82,9 @@ struct ContentView: View {
         })
         .disabled(cardCount + offset < 1 || cardCount + offset > emojis.count)
     }
+     */
     
-    
+
     // displays the current amount of cards on screen
     var card: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 70))]) {
@@ -52,12 +97,16 @@ struct ContentView: View {
     }
     
     // represnts the lower part of the display with buttons
-    var cardCountAdjusters: some View {
+    var cardThemeAdjusters: some View {
         HStack {
-            
             themeView
-            
         }
+    }
+     
+    
+    // generates a random index position from the theme array of pairs
+    func getRandomIndex(of theme: [(String, String)]) -> Int {
+        return Int.random(in: 0..<theme.count)
     }
     
     // variable that represents the Button for
@@ -79,9 +128,25 @@ struct ContentView: View {
      */
     
     // creates a button for each theme with a array and symbol passed in
-    func setTheme(to theme: [String], name: String, symbol: String) -> some View {
+    func setTheme(to theme: [(String,String)], name: String, symbol: String) -> some View {
         Button(action: {
-            emojis = theme
+            emojis = [] // reset to empty array
+            cardCount = 0 // reset cardCount to 0
+            
+            var temp: [(String, String)] = theme.shuffled()
+            var idx: Int
+            
+            while cardCount < 16{
+                idx = getRandomIndex(of: temp)
+                
+                // adds the two items of a pair to emojis list
+                emojis.append(temp[idx].0)
+                emojis.append(temp[idx].1)
+                cardCount += 2
+                // remove the used pair from temp
+                temp.remove(at: idx)
+            }
+            emojis.shuffle() // shuffle the array so that the cards are random
         }, label: {
             VStack {
                 Image(systemName: symbol)
@@ -128,7 +193,7 @@ struct CardView: View {
             Group {
                 base.fill(.white)
                 Text(content).font(.largeTitle)
-                base.stroke(lineWidth: 2).foregroundColor(.orange)
+                base.stroke(lineWidth: 2).foregroundColor(.red)
             }
             // opacity is used to make the Group contents fill if face down
             // and opacity is used to make the fill color transparent if face up
@@ -137,7 +202,6 @@ struct CardView: View {
         }.onTapGesture {
             isFaceUp.toggle()
         }
-        
     }
 }
 
